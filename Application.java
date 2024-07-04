@@ -271,7 +271,7 @@ public class Application {
 		 * @param angleRadians Mandatory Angle in degrees
 		 * @return Tangent value of angleRadians in radians
 		 */
-		double angleRadians = Math.toRadians(angleDegrees); //Transforms angle from degrees to radians
+		double angleRadians = Math.toRadians(angleDegrees); //Transforms angle from degrees to radians 
 	    return Math.tan(angleRadians);
 	}
 	
