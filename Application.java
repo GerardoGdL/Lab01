@@ -30,7 +30,7 @@ public class Application {
 		}
 		while (true) { //Continue the loop until the user prompts an exit
 			if (flag) { //If input is necessary
-				System.out.println("\nEnter operation (add, subtract, multiply, divide, pow, sqrt, log, log10, sin, cos, tan, factorial) or 'exit' to quit:");
+				System.out.println("\nEnter operation (add, subtract, multiply, divide, pow, sqrt, log, log10, sin, cos, tan, factorial, permutation) or 'exit' to quit:");
 				operation = scn.nextLine();
 	        
 				if (operation.equalsIgnoreCase("exit")) { //If user entered exit, terminate program
@@ -74,6 +74,28 @@ public class Application {
 	                case "pow":
 	                    System.out.println("Result: " + power(num1, num2));
 	                    break;
+	                case "permutation":
+	                	if (num1 < 0 || ((num2 > 100) || (num2 < 0))) { //Checks if the length of list was input as negative OR we are trying to select over 100 items OR we are trying to select negative items
+	                		System.out.println("Error, you have selected a negative length for your list or you have input an invalid selection based on the length of your list");
+	                		break;
+	                	}
+	                	if (num1 > 100) { //Checks if the length of the array is under 100
+	                		System.out.println("Error, your array has a max length of 100");
+	                		break;
+	                	}
+	                	System.out.println("Please enter your array values separated by a space: ");
+	                	String words = scn.nextLine();
+	                	String[] array = words.split(" ");
+	                	if (words.isEmpty()) {
+	                		System.out.println("You did not enter any values");
+	                		break;
+	                	}
+	                	if (array.length != (int)num1) {
+	                		System.out.println("Error, you stated your list would be a different length than what you entered");
+	                		break;
+	                	}
+	                	System.out.println("Result: " + permutation(array.length, (int)num2));
+	                	break;
 	                default:
 	                    System.out.println("Invalid operation.");
 	                    break;
@@ -154,7 +176,7 @@ public class Application {
 	    if (num <= 1) { //Originally, the progress bar does not cover 1 as it does not go through the recursive path which includes the code for it
 	        //Solution to add progress bar:
 	    	int progress = 100;
-	    	System.out.print("\rCalculating factorial: " + progress + "%");
+	    	System.out.println("\rCalculating factorial: " + progress + "%");
 	    	return 1;
 	    }
 	    // Calculate progress and update progress bar
@@ -274,5 +296,28 @@ public class Application {
 		double angleRadians = Math.toRadians(angleDegrees); //Transforms angle from degrees to radians 
 	    return Math.tan(angleRadians);
 	}
+	
+	public static int permutation(int n, int r) {
+		/**
+		 * This performs the permutation of two numbers without replacement
+		 * @param n Mandatory Length of array 
+		 * @param r Mandatory Number of items to choose
+		 * @return Permutation of nPr
+		 */
+		if (r < 0 || r > n) {
+			System.out.println("Error, factorial not defined for negative numbers or you are choosing more elements than you entered");
+			return 0;
+		}
+			if (r == 0)
+				return 1;
+			else {
+				System.out.println("Finding first factorial...");
+				int numerator = (int) factorial(n);
+				System.out.println("Finding second factorial...");
+				int denominator = (int) factorial(n-r);
+				return numerator/denominator;
+			}
+	}
+	
 	
 }
